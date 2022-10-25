@@ -1,0 +1,46 @@
+  # На вход программе подается строка текста на английском языке, в которой
+  # нужно зашифровать все слова. Каждое слово строки следует зашифровать с
+  # помощью шифра Цезаря (циклического сдвига на длину этого слова). Строчные
+  # буквы при этом остаются строчными, а прописные – прописными.
+
+
+rus = 'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя'  # 1040 - 1103
+angbol = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'  # 65 -90
+angmal = 'abcdefghijklmnopqrstuvwxyz'  # 97 -122
+znaki = '!@#$%^^&*_)(*&*(%^|+_""}{?><,./'':;|'
+stroka2 = str(input())
+n = int
+shifr = ''
+stroka_bez_znakow = ''
+for c in range(len(stroka2)):
+    if stroka2[c] not in znaki:
+        stroka_bez_znakow = stroka_bez_znakow + stroka2[c]
+ls = stroka2.split()
+ls_bez_zk = stroka_bez_znakow.split()
+def rasshifrovka(n, fraza):
+    shifr = ''
+    for c in range(len(fraza)):
+        if fraza[c].isalpha():
+            if fraza[c] in angbol or fraza[c] in angmal:
+                num = ord(fraza[c])
+                numshifr = num + n
+                if 65 <= num <= 90 and numshifr > 90:
+                    ost1 = 90 - num
+                    ost2 = n - ost1
+                    numshifr = 65 + ost2 - 1
+                if 97 <= num <= 122 and numshifr > 122:
+                    ost1 = 122 - num
+                    ost2 = n - ost1
+                    numshifr = 97 + ost2 - 1
+                shifr = shifr + chr(numshifr)
+            else:
+                shifr = shifr + fraza[c]
+        else:
+            shifr = shifr + fraza[c]
+    return shifr
+
+
+for c in range(len(ls)):
+    n = len(ls_bez_zk[c])
+    fraza = ls[c]
+    print(rasshifrovka(n, fraza), end=' ')
