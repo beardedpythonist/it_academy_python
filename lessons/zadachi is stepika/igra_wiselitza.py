@@ -172,10 +172,13 @@ def igra():
         letter = str(input())
         if letter in nazw_bykwy:
             print('Ты уже называл эту букву! Давай другую!')
+            continue
         if len(letter) >= 2:
             print('Строго одну букву!!')
+            continue
         if not letter.isalpha():
             print('Вводи букву, а не фигню какую то!')
+            continue
         else:
             nazw_bykwy = nazw_bykwy + letter
             for c in range(len(word_completion)):
@@ -190,7 +193,7 @@ def igra():
                 print('           ', *word_completion)
             else:
                 tries = tries + 1
-                print('Не угадал, пробуй еще!','\n', 'Использовал попыток:', tries, displayhangman(-(tries + 1)) )
+                print('Не угадал, пробуй еще!', displayhangman(-(tries + 1)))
                 print('           ', *word_completion)
 
             if tries >= 6:
@@ -209,6 +212,7 @@ while z:
     if otwet == 'д':
         igra()
     else:
+        print('Удачи, дохляк')
         z = False
 
 
